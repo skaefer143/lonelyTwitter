@@ -14,11 +14,6 @@ public abstract class Tweet {
         this.message = message;
     }
 
-    public Tweet(String message, Date date){
-        this.message = message;
-        this.date = date;
-    }
-
     public abstract Boolean isImportant();
     //abstract means it forces all children to have this method
 
