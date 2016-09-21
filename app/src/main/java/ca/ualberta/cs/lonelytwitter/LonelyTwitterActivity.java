@@ -41,8 +41,10 @@ public class LonelyTwitterActivity extends Activity {
 
 		bodyText = (EditText) findViewById(R.id.body);
 		Button saveButton = (Button) findViewById(R.id.save);
+		Button clearButton = (Button) findViewById(R.id.clear);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
+		//save button
 		saveButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
@@ -52,6 +54,20 @@ public class LonelyTwitterActivity extends Activity {
 				Tweet newTweet = new NormalTweet(text);
 
 				tweetList.add(newTweet);
+				adapter.notifyDataSetChanged();
+
+				saveInFile();
+
+			}
+		});
+
+		//clear button
+		clearButton.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				setResult(RESULT_OK);
+
+				tweetList.clear();
 				adapter.notifyDataSetChanged();
 
 				saveInFile();
@@ -80,7 +96,7 @@ public class LonelyTwitterActivity extends Activity {
 			//converting ArrayList into Gson ?
 			Type listType = new TypeToken<ArrayList<NormalTweet>>(){}.getType();
 
-			tweetList = gson.fromJson(in,listType);
+			tweetList = gson.fromJson(in, listType);
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
