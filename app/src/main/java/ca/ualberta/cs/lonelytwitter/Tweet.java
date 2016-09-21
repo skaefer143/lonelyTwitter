@@ -12,6 +12,7 @@ public abstract class Tweet {
     //private means only stuff in this class can use the string message
     public Tweet(String message){
         this.message = message;
+        this.date = new Date();
     }
 
     public abstract Boolean isImportant();
@@ -36,5 +37,10 @@ public abstract class Tweet {
 
     public Date getDate() {
         return date;
+    }
+
+    @Override
+    public String toString(){
+        return date.toString() + " | " + message;
     }
 }
