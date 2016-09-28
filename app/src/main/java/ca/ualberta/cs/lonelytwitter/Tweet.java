@@ -43,4 +43,15 @@ public abstract class Tweet {
     public String toString(){
         return date.toString() + " | " + message;
     }
+
+    public boolean equals(Tweet tweet){
+        // checks to see if all variables of both Tweets are the same (message and date)
+        if (message.equals(tweet.message)){
+            if (date.equals(tweet.getDate())){
+                return true;
+            }
+        }
+        return false;
+
+    }
 }
