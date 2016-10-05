@@ -6,6 +6,17 @@ import java.util.Date;
  * Created by Storm on 2016-09-13.
  */
 public interface Tweetable {
+    /**
+     * Gets message.
+     *
+     * @return the message
+     */
     public String getMessage();
+
+    /**
+     * Gets date.
+     *
+     * @return the date
+     */
     public Date getDate();
 }

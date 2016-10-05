@@ -8,13 +8,18 @@ import java.util.List;
 /**
  * Created by Storm on 2016-09-27.
  */
-
 public class TweetListTest extends ActivityInstrumentationTestCase2<LonelyTwitterActivity> {
 
+    /**
+     * Instantiates a new Tweet list test.
+     */
     public TweetListTest() {
         super(LonelyTwitterActivity.class);
     }
 
+    /**
+     * Test add tweet.
+     */
     public void testAddTweet(){
         TweetList list = new TweetList();
 
@@ -36,6 +41,9 @@ public class TweetListTest extends ActivityInstrumentationTestCase2<LonelyTwitte
 
     }
 
+    /**
+     * Test has tweet.
+     */
     public void testHasTweet() {
         TweetList list = new TweetList();
 
@@ -50,6 +58,9 @@ public class TweetListTest extends ActivityInstrumentationTestCase2<LonelyTwitte
         assertFalse(list.hasTweet());
     }
 
+    /**
+     * Test get tweet.
+     */
     public void testGetTweet() {
         TweetList list = new TweetList();
 
@@ -64,6 +75,9 @@ public class TweetListTest extends ActivityInstrumentationTestCase2<LonelyTwitte
         assertEquals(b, list.getTweet(1));
     }
 
+    /**
+     * Test remove tweet.
+     */
     public void testRemoveTweet() {
         TweetList list = new TweetList();
 
@@ -75,6 +89,9 @@ public class TweetListTest extends ActivityInstrumentationTestCase2<LonelyTwitte
         assertFalse(list.hasTweet(a));
     }
 
+    /**
+     * Test get tweets.
+     */
     public void testGetTweets() {
         TweetList list = new TweetList();
 
@@ -99,6 +116,9 @@ public class TweetListTest extends ActivityInstrumentationTestCase2<LonelyTwitte
 
     }
 
+    /**
+     * Test get count.
+     */
     public void testGetCount(){
         //checks to see if count is correct
         TweetList list = new TweetList();

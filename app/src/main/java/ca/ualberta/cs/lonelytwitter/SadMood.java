@@ -7,10 +7,21 @@ import java.util.Date;
  */
 public class SadMood extends Mood {
 
+    /**
+     * Instantiates a new Sad mood.
+     *
+     * @param currentMood the current mood
+     */
     public SadMood(String currentMood){
         super(currentMood);
     }
 
+    /**
+     * Instantiates a new Sad mood.
+     *
+     * @param currentMood the current mood
+     * @param date        the date
+     */
     public SadMood(String currentMood, Date date){
         super(currentMood, date);
     }
