@@ -48,7 +48,7 @@ public class LonelyTwitterActivity extends Activity {
 
 		bodyText = (EditText) findViewById(R.id.body);
 		Button saveButton = (Button) findViewById(R.id.save);
-		Button clearButton = (Button) findViewById(R.id.clear);
+		Button searchButton = (Button) findViewById(R.id.search);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
 		saveButton.setOnClickListener(new View.OnClickListener() {
@@ -57,20 +57,32 @@ public class LonelyTwitterActivity extends Activity {
 				setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
 				NormalTweet newTweet = new NormalTweet(text);
-				tweetList.add(newTweet);
+				tweetList.add(0, newTweet);
 				adapter.notifyDataSetChanged();
 				// saveInFile(); // TODO replace this with elastic search
 				ElasticsearchTweetController.AddTweetsTask addTweetsTask = new ElasticsearchTweetController.AddTweetsTask();
 				addTweetsTask.execute(newTweet);
+				bodyText.setText("");
 			}
 		});
 
-		clearButton.setOnClickListener(new View.OnClickListener() {
+		searchButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
 				setResult(RESULT_OK);
 				tweetList.clear();
-				deleteFile(FILENAME);  // TODO deprecate this button
+				adapter.notifyDataSetChanged();
+				//refresh list, with search term
+				ElasticsearchTweetController.GetTweetsTask getTweetsTask = new ElasticsearchTweetController.GetTweetsTask();
+				getTweetsTask.execute(bodyText.getText().toString());
+				try {
+					tweetList = getTweetsTask.get();
+				}
+				catch (Exception e) {
+					Log.i("Error", "Failed to get the tweets out of the async object.");
+				}
+				adapter.clear();
+				adapter.addAll(tweetList);
 				adapter.notifyDataSetChanged();
 			}
 		});

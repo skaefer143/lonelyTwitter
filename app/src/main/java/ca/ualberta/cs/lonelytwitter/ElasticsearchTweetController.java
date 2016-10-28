@@ -30,8 +30,29 @@ public class ElasticsearchTweetController {
 
             ArrayList<NormalTweet> tweets = new ArrayList<NormalTweet>();
 
+            // String search_string = "{\from\": 0, \"size\": 10000}";
             // assume that search_parameters[0] is the only search term we are interested in using
-            Search search = new Search.Builder(search_parameters[0])
+            String search_string = "";
+            if(search_parameters[0].replaceAll("\\s","").equals("")) {
+                //if empty search string, display all tweets!
+                search_string = "{ " +
+                        "\"size\" : 10000, " +
+                            "\"query\" : {" +
+                                "\"match_all\" : {} " +
+                            "}" +
+                        "}";
+            } else {
+                search_string = "{ " +
+                        "\"size\" : 10000, " +
+                        "\"query\" : {" +
+                            "\"query_string\" : { " +
+                                "\"query\" : " + "\"" + search_parameters[0] + "\"" +
+                                "}" +
+                            "}" +
+                        "}";
+            }
+
+            Search search = new Search.Builder(search_string)
                     .addIndex("testing")
                     .addType("tweet")
                     .build();
