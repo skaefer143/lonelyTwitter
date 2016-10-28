@@ -61,7 +61,9 @@ public class ElasticsearchTweetController {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
                     List<NormalTweet> foundTweets = result.getSourceAsObjectList(NormalTweet.class);
-                    tweets.addAll(foundTweets);
+                    for(int i = 0; i < foundTweets.size(); ++i){
+                        tweets.add(0, foundTweets.get(i));
+                    }
                 }
                 else {
                     Log.i("Error", "The search query failed to find any tweets that matched.");
